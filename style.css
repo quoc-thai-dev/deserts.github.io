@@ -1,0 +1,454 @@
+:root {
+  --color-red: hsl(14, 86%, 42%);
+  --color-green: hsl(159, 69%, 38%);
+
+  --color-rose-50: hsl(20, 50%, 98%);
+  --color-rose-100: hsl(13, 31%, 94%);
+  --color-rose-300: hsl(14, 25%, 72%);
+  --color-rose-400: hsl(7, 20%, 60%);
+  --color-rose-500: hsl(12, 20%, 44%);
+  --color-rose-900: hsl(14, 65%, 9%);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Red Hat"; /* Name of the font */
+  src: url("./assets/fonts/RedHatText-VariableFont_wght.ttf") format("truetype"); /* Path to the font */
+}
+body {
+  font-family: "Red Hat";
+  font-size: 16px;
+}
+.body-no-scroll {
+  overflow: hidden; /* Disables scrolling */
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: var(--color-rose-100);
+}
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+h2 {
+  font-size: 2rem;
+  color: var(--color-red);
+  margin-bottom: 2rem;
+}
+.menu {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+.cart {
+  flex: 1;
+  min-width: 200px;
+  flex-direction: column;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 30px;
+}
+.cart .empty {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cart .empty p {
+  color: var(--color-rose-400);
+}
+.cart .empty img {
+  max-width: 100%;
+  max-height: 250xp;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-rose-100);
+}
+.cart .environment {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  background-color: var(--color-rose-50);
+  border-radius: 1rem;
+}
+.cart .cart-total {
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cart .cart-total p:nth-child(2) {
+  font-size: 3rem;
+  font-weight: 600;
+}
+#product-list {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  justify-items: start;
+}
+.menu .product {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.menu .product .image {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.menu .product .description {
+  line-height: 1.5;
+}
+.menu .product .description small {
+  color: var(--color-rose-400);
+}
+.menu .product .description h3 {
+  color: var(--color-rose-900);
+}
+.menu .product .description p {
+  color: var(--color-red);
+  font-weight: 600;
+}
+.menu .product .image img {
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease-in-out;
+}
+.menu .product.selected .image img {
+  border: 3px solid var(--color-red);
+}
+.menu .product .image img:hover {
+  transform: scale(1.05);
+}
+
+.menu .product .image .btn-add {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  /* display: none; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  /* padding: 0.5rem 2rem; */
+  min-width: 10rem;
+  width: 33%;
+  height: 3rem;
+  border-radius: 25px;
+  outline: none;
+  border: 1px solid var(--color-red);
+  transform: translate(-50%, 50%);
+  cursor: pointer;
+  background-color: white;
+}
+/* .group-quantity {
+  display: none;
+} */
+.btn-remove {
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.menu .product .image .group-quantity {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-weight: 600;
+  /* padding: 0.5rem 3rem; */
+  min-width: 10rem;
+  width: 33%;
+  height: 3rem;
+  border-radius: 25px;
+  outline: none;
+  border: 1px solid var(--color-red);
+  transform: translate(-50%, 50%);
+  background-color: var(--color-red);
+  padding: 1rem;
+  color: white;
+  transition: opacity 0.3s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
+.menu .product.selected .image .group-quantity {
+  visibility: visible;
+  opacity: 1;
+}
+.menu .product .image .group-quantity button {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* .menu .product .image .group-quantity button svg {
+  pointer-events: all;
+} */
+.cart-item button {
+  background-color: transparent;
+  color: var(--color-rose-500);
+  border: 1px solid var(--color-rose-500);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.cart-item .cart-detail {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.cart-item .cart-detail span:first-child {
+  color: var(--color-red);
+}
+.btn-order {
+  margin-top: 1.5rem;
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+  background-color: var(--color-red);
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  font-family: "Red Hat";
+  cursor: pointer;
+}
+.cart-item button svg {
+  pointer-events: none;
+}
+.cart-item button:hover {
+  color: var(--color-red);
+  border-color: var(--color-red);
+  transform: scale(1.5);
+}
+/* .menu .product.selected .image .btn-add {
+    background-color: var(--color-red);
+    color: white;
+  } */
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+/* Modal Background - Backdrop */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: none; /* Initially hidden */
+  z-index: 998; /* Positioned below modal content */
+}
+
+/* Modal Container (Visible when the backdrop is shown) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999; /* Ensure the modal content is above the backdrop */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 1rem;
+  /* width: 80%;
+  max-width: 500px; */
+  width: 100%;
+  /* max-height: 90%; */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* position: relative; */
+  position: absolute;
+  bottom: 0;
+  margin: auto;
+  z-index: inherit;
+}
+.modal-content h2 {
+  color: var(--color-rose-900);
+  padding: 0;
+  margin: 1rem 0;
+}
+.modal-content p {
+  color: var(--color-rose-900);
+  margin-bottom: 1rem;
+}
+.modal-content #cart-order {
+  background-color: var(--color-rose-50);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+.modal-content .list-item {
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+#cart-order .item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-rose-100);
+}
+
+#cart-order .item div:nth-child(2) {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+#cart-order .item div:nth-child(2) div {
+  display: flex;
+  flex-direction: row;
+}
+#cart-order .item div:first-child {
+  position: relative;
+  width: 5rem;
+  height: auto;
+}
+#cart-order .item div:first-child img {
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+#cart-order .cart-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+}
+.modal-content button {
+  display: block;
+  width: 100%;
+  padding: 1rem 0;
+  border-radius: 1rem;
+  outline: none;
+  border: none;
+  background-color: var(--color-red);
+  font-family: Red Hat;
+  font-size: 1.25rem;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#cart-order .cart-total p:first-child {
+  font-size: 1.25rem;
+}
+#cart-order .cart-total p:last-child {
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+/* Close button */
+.close {
+  color: #aaa;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+  #product-list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 20px;
+  }
+  #product-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .container {
+    flex-direction: row;
+    align-items: baseline;
+  }
+}
+@media screen and (min-width: 1200px) {
+  body {
+    font-size: 22px;
+  }
+  .container {
+    flex-direction: row;
+    align-items: baseline;
+  }
+  #product-list {
+    gap: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (min-width: 768px) {
+  .modal-content {
+    width: 80%;
+    max-width: 700px;
+    position: relative;
+  }
+}
